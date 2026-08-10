@@ -21,11 +21,14 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    // FIX: We removed the old getBookById method that returned Optional<Book>.
-    // Now there is only this one, correct version!
     public Book getBookById(Long id) {
         return bookRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found with ID: " + id));
+    }
+
+    // New service method to fetch books by author
+    public List<Book> getBooksByAuthor(String author) {
+        return bookRepository.findByAuthor(author);
     }
 
     public Book saveBook(Book book) {

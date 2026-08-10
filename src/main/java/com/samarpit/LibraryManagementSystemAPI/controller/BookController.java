@@ -30,9 +30,15 @@ public class BookController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Book> getBookById(@PathVariable Long id) {
-
         Book book = bookService.getBookById(id);
         return ResponseEntity.ok(book);
+    }
+
+    // New GET endpoint: /api/books/search?author=AuthorName
+    @GetMapping("/search")
+    public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam String author) {
+        List<Book> books = bookService.getBooksByAuthor(author);
+        return ResponseEntity.ok(books);
     }
 
     @DeleteMapping("/{id}")
