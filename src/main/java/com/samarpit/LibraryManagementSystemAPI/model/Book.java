@@ -12,6 +12,23 @@ public class Book {
     private String isbn;
     private String authorName;
     private int publishedYear;
+    private int totalCopies;
+    private int availableCopies;
+    public int getTotalCopies() {
+        return totalCopies;
+    }
+
+    public void setTotalCopies(int totalCopies) {
+        this.totalCopies = totalCopies;
+    }
+
+    public int getAvailableCopies() {
+        return availableCopies;
+    }
+
+    public void setAvailableCopies(int availableCopies) {
+        this.availableCopies = availableCopies;
+    }
     public Book() {}
     public Book(String title, String isbn, String authorName, int publishedYear) {
         this.title = title;

@@ -26,7 +26,6 @@ public class BookService {
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found with ID: " + id));
     }
 
-    // New service method to fetch books by author
     public List<Book> getBooksByAuthor(String author) {
         return bookRepository.findByAuthor(author);
     }
@@ -37,5 +36,34 @@ public class BookService {
 
     public void deleteBook(Long id) {
         bookRepository.deleteById(id);
+    }
+
+    // --- NEW BUSINESS LOGIC METHODS ---
+
+    public Book borrowBook(Long id) {
+        // 1. Find the book (this uses your existing method that handles the 404 error!)
+        Book book = getBookById(id);
+
+        // 2. Check if there are copies available
+        if (book.getAvailableCopies() <= 0) {
+            throw new RuntimeException("Sorry, this book is currently out of stock!");
+        }
+
+        // 3. Decrease the available copies by 1 and save
+        book.setAvailableCopies(book.getAvailableCopies() - 1);
+        return bookRepository.save(book);
+    }
+
+    public Book returnBook(Long id) {
+        Book book = getBookById(id);
+
+        // Prevent returning more copies than the library actually owns
+        if (book.getAvailableCopies() >= book.getTotalCopies()) {
+            throw new RuntimeException("All copies of this book are already in the library!");
+        }
+
+        // Increase the available copies by 1 and save
+        book.setAvailableCopies(book.getAvailableCopies() + 1);
+        return bookRepository.save(book);
     }
 }

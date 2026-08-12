@@ -34,12 +34,30 @@ public class BookController {
         return ResponseEntity.ok(book);
     }
 
-    // New GET endpoint: /api/books/search?author=AuthorName
+    // GET endpoint: /api/books/search?author=AuthorName
     @GetMapping("/search")
     public ResponseEntity<List<Book>> getBooksByAuthor(@RequestParam String author) {
         List<Book> books = bookService.getBooksByAuthor(author);
         return ResponseEntity.ok(books);
     }
+
+    // --- NEW BUSINESS LOGIC ENDPOINTS ---
+
+    // POST endpoint: /api/books/{id}/borrow
+    @PostMapping("/{id}/borrow")
+    public ResponseEntity<Book> borrowBook(@PathVariable Long id) {
+        Book updatedBook = bookService.borrowBook(id);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    // POST endpoint: /api/books/{id}/return
+    @PostMapping("/{id}/return")
+    public ResponseEntity<Book> returnBook(@PathVariable Long id) {
+        Book updatedBook = bookService.returnBook(id);
+        return ResponseEntity.ok(updatedBook);
+    }
+
+    // ------------------------------------
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteBook(@PathVariable Long id) {
