@@ -1,58 +1,24 @@
-Markdown
 # Library Management System API
 
-A RESTful backend service built with Spring Boot and MySQL to manage library resources, including books and authors. 
+A RESTful web service built with **Spring Boot** and **Spring Data JPA** to manage a library's book inventory. This API allows for seamless CRUD operations, custom search queries, and features centralized global exception handling for clean, consistent error responses.
 
-## Tech Stack
-* **Language:** Java
-* **Framework:** Spring Boot
-* **Database:** MySQL
-* **Dependencies:** Spring Web, Spring Data JPA, MySQL Connector
+## 🚀 Tech Stack
 
-## Prerequisites
-Ensure you have the following installed on your local machine:
-* Java Development Kit (JDK 17 or higher)
-* MySQL Server 
-* Git
-* Postman (for API testing)
+*   **Java 17+** 
+*   **Spring Boot 3.x** (Web, Data JPA)
+*   **H2 In-Memory Database** (for rapid development and testing)
+*   **Maven** (Dependency Management)
+*   **Hibernate** (ORM)
 
-## Local Setup & Launch Instructions
+## ✨ Features
 
-### 1. Database Configuration
-Ensure your MySQL server is running and create a new database:
-```sql
-CREATE DATABASE library_db;
-This application uses an environment variable to secure your database password. You will need to set this variable on your machine before running the application so it can successfully authenticate.
+*   **Complete CRUD Functionality:** Create, Read, Update, and Delete books.
+*   **Custom Search:** Filter the library catalog dynamically by author name.
+*   **Global Exception Handling:** Custom `ResourceNotFoundException` caught by a `@ControllerAdvice` class to return standard 404 JSON error responses instead of stack traces.
+*   **Zero-Config Database:** Uses an embedded H2 database that resets on restart, eliminating the need for external database setup.
 
-2. Clone and Run
-Open your terminal and run the following commands to clone the repository and start the server:
+## 🛠️ Local Setup & Installation
 
-Bash
-# Clone the repository
-git clone [https://github.com/YOUR_USERNAME/library-management-api.git](https://github.com/YOUR_USERNAME/library-management-api.git)
-cd library-management-api
-
-# Set your local database password variable for the terminal session
-export DB_PASSWORD="your_actual_mysql_password"
-
-# Build and run the application using the Maven wrapper
-./mvnw spring-boot:run
-The application will start on http://localhost:8080. Hibernate will automatically connect to MySQL and generate the necessary tables.
-
-API Endpoints (Current Progress)
-Books
-Method	Endpoint	Description
-GET	/api/books	Retrieve a list of all books
-POST	/api/books	Add a new book to the database
-Example POST Request Body:
-
-JSON
-{
-    "title": "The Hobbit",
-    "isbn": "978-0547928227",
-    "authorName": "J.R.R. Tolkien",
-    "publishedYear": 1937
-}
-Author
-Samarpit Rawat
-Computer Science and Engineering, NIT Raipur CSE'29
+1. **Clone the repository:**
+   ```bash
+   git clone [https://github.com/samarpitrawat97-eng/LibraryManagementAPI.git](https://github.com/samarpitrawat97-eng/LibraryManagementAPI.git)
