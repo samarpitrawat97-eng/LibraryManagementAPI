@@ -3,6 +3,10 @@ package com.samarpit.LibraryManagementSystemAPI.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "books")
@@ -30,6 +34,12 @@ public class Book {
 
     @Min(value = 0, message = "Available copies cannot be negative")
     private int availableCopies;
+    @CreatedDate
+    @Column(updatable = false) // Ensures this timestamp is never overwritten after creation
+    private LocalDateTime createdAt;
+
+    @LastModifiedDate
+    private LocalDateTime updatedAt;
 
     public Book() {}
 
